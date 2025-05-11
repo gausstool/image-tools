@@ -6,7 +6,6 @@ import ProcessNodeCompress from "../components/ProcessNodeCompress";
 import { EnumImageType, ImageInfo } from '../types/image';
 import { getImageDimensions } from '../utils';
 import { compressAndScaleImage } from '../utils/process';
-import './ImageScale.css';
 
 const ImageScale: React.FC = () => {
   const [originalImage, setOriginalImage] = useState<ImageInfo | null>(null);
@@ -95,17 +94,15 @@ const ImageScale: React.FC = () => {
               开始
             </button>
           )}
-          {error && <div className="image-converter__error">{error}</div>}
-          {status && <div className="image-converter__status">{status}</div>}
+          {error && <div className="image-tool__error">{error}</div>}
+          {status && <div className="image-tool__status">{status}</div>}
         </div>
         <div className="image-tool__output">
           {originalImage && scaledImage && (
-            <div className="image-scale__content">
-              <div className="image-scale__preview">
+              <div className="image-tool__preview">
                 <ProcessNodeDestination title="原始图片" image={originalImage}></ProcessNodeDestination>
                 <ProcessNodeDestination title="缩放后图片" image={scaledImage}></ProcessNodeDestination>
               </div>
-            </div>
           )}
         </div>
       </div>
