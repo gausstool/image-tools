@@ -1,10 +1,10 @@
-import { Route, BrowserRouter as Router, Routes, Link, useLocation } from 'react-router-dom';
+import { Link, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
-import ImageCompress from './pages/ImageCompress';
-import ImageScale from './pages/ImageScale';
 import ImageCompose from './pages/ImageCompose';
+import ImageCompress from './pages/ImageCompress';
 import ImageRemoveBackground from './pages/ImageRemoveBackground';
+import ImageScale from './pages/ImageScale';
 
 function Sidebar() {
   const location = useLocation();
@@ -15,7 +15,7 @@ function Sidebar() {
         <Link to="/compress" className={location.pathname === '/compress' ? 'g-menu-item is-active' : 'g-menu-item'}>图片压缩</Link>
         <Link to="/scale" className={location.pathname === '/scale' ? 'g-menu-item is-active' : 'g-menu-item'}>图片缩放</Link>
         <Link to="/remove-bg" className={location.pathname === '/remove-bg' ? 'g-menu-item is-active' : 'g-menu-item'}>去除背景</Link>
-        <Link to="/compose" className={location.pathname === '/compose' ? 'g-menu-item is-active' : 'g-menu-item'}>组合工具</Link>
+        <Link to="/compose" className={location.pathname === '/compose' ? 'g-menu-item is-active' : 'g-menu-item'}>拖拽组合</Link>
       </nav>
     </div>
   );
@@ -58,12 +58,12 @@ function AppBody() {
 
 function App() {
   return (
-    <Router basename="/image-tools/">
+    <Router>
       <div className="layout">
         <div className="layout__container">
           <div className="layout__container--inner">
-          <AppHead />
-          <AppBody />
+            <AppHead />
+            <AppBody />
           </div>
         </div>
       </div>
