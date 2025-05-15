@@ -19,3 +19,44 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* VSCode 风格滚动条样式 */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #424242;
+  border-radius: 7px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #505050;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.ml-1x {
+  margin-left: 2px;
+}
+
+.ml-2x {
+  margin-left: 4px;
+}
+
+.mr-1x {
+  margin-right: 2px;
+}
+
+.mr-2x {
+  margin-right: 4px;
+}
