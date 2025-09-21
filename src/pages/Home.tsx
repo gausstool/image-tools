@@ -15,6 +15,7 @@ const Home: React.FC = () => {
   const [sourceKey, setSourceKey] = useState<number>(0);
   const [originalImages, setOriginalImages] = useState<ImageInfo[]>([]);
   const [processedImages, setProcessedImages] = useState<ImageInfo[]>([]);
+  const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState<number>(0);
 
   const [quality, setQuality] = useState<number>(80);
@@ -54,6 +55,7 @@ const Home: React.FC = () => {
       return;
     }
 
+    setProcessing(true)
     try {
       setError('');
       setProgress(0);
@@ -90,6 +92,7 @@ const Home: React.FC = () => {
     } catch (error: any) {
       onImageError(error);
     }
+    setProcessing(false)
   };
 
   // 添加删除原始图片的处理函数
@@ -151,15 +154,17 @@ const Home: React.FC = () => {
           <ProcessNodeScale scale={scale} onChange={(scale) => {
             setScale(scale);
           }} ></ProcessNodeScale>
+
+          <button className="image-tool__button" onClick={processImages} disabled={originalImages.length === 0 || processing}>
+            {processing ? '正在处理' : '开始处理'} ({originalImages.length} 张图片)
+          </button>
           {originalImages.length > 0 && (
             <>
-              <button className="image-tool__button" onClick={processImages}>
-                开始处理 ({originalImages.length} 张图片)
-              </button>
+
               <div style={{ marginTop: '16px', padding: '0 10px' }}>
                 <Slider value={progress} />
                 <div style={{ textAlign: 'center', marginTop: '8px' }}>
-                  <div className="image-tool__status">    处理进度：{progress}%</div>
+                  <div className="image-tool__status">处理进度：{progress}%</div>
                 </div>
               </div>
             </>
@@ -172,7 +177,7 @@ const Home: React.FC = () => {
             <div className="image-tool__preview">
               <div className="image-tool__preview-group">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <h3>原始图片</h3>
+                  <h3 className="image-tool__preview-title">原始图片</h3>
                   <DeleteOutlined
                     onClick={handleClearOriginal}
                     style={{ fontSize: '16px', cursor: 'pointer' }}
@@ -192,7 +197,7 @@ const Home: React.FC = () => {
               {processedImages.length > 0 && (
                 <div className="image-tool__preview-group">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h3>处理后图片</h3>
+                    <h3 className="image-tool__preview-title">处理后图片</h3>
                     <DeleteOutlined
                       onClick={handleClearProcessed}
                       style={{ fontSize: '16px', cursor: 'pointer' }}

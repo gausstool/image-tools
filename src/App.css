@@ -3,7 +3,6 @@
   width: 100vw;
   height: 100vh;
   background: #fff;
-  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -11,12 +10,6 @@
 .layout__container {
   width: 100%;
   height: 100%;
-  padding: 8px;
-  position: relative;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
 }
 
 
@@ -24,9 +17,9 @@
   width: 100%;
   height: 100%;
   background: #fff;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   overflow: hidden;
-  box-shadow: 1px 1px 10px #1e1e1e;
+  /* box-shadow: 1px 1px 10px #1e1e1e; */
 }
 
 .layout__body {
@@ -38,114 +31,8 @@
   overflow: hidden;
 }
 
-.image-tool__input {
-  min-width: 360px;
-  padding-left: 20px;
-}
 
-@media screen and (min-width: 960px) {
-  .layout__container {
-    width: 800px;
-    height: 450px;
-    padding: 8px;
-  }
-
-  .layout__container--inner {
-    border-radius: 8px;
-  }
-
-  .layout__header-title {
-    max-width: 100%;
-  }
-
-  .layout__body {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: start;
-  }
-
-  .image-tool__body {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-
-
-
-  .image-tool__output {
-    flex: 1;
-    padding-right: 20px;
-    height: 100%;
-  }
-
-  .image-tool__preview {
-    height: 100%;
-  }
-
-  .image-tool__preview-group {
-    width: 50%;
-    height: 100%;
-  }
-  .image-tool__preview-group h3 {
-    text-align: center ;
-    height: 30px;
-    margin: 10px 0;
-  }
-  .image-tool__list {
-    height: calc(100% - 60px);
-    overflow-y: auto;
-  }
-
-  .image-tool__preview {
-    flex-direction: row;
-  }
-}
-
-
-@media screen and (min-width: 1024px) {
-  .layout__container {
-    width: 960px;
-    height: 480px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .layout__container {
-    width: 1200px;
-    height: 600px;
-  }
-}
-
-@media screen and (min-width: 1366px) {
-  .layout__container {
-    width: 1280px;
-    height: 640px;
-  }
-}
-
-@media screen and (min-width: 1536px) {
-  .layout__container {
-    width: 1366px;
-    height: 678px;
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  .layout__container {
-    width: 1440px;
-    height: 720px;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  .layout__container {
-    width: 1600px;
-    height: 800px;
-  }
-}
-
-.layout__header {
+.layout-header {
   width: 100%;
   height: 30px;
   display: flex;
@@ -156,13 +43,14 @@
   background: #1e1e1e;
 }
 
-.layout__header-right {
+.layout-header-right {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.layout__header-title {
+.layout-header-title {
+  margin: 0;
   display: inline-block;
   font-size: 14px;
   font-weight: normal;
@@ -175,62 +63,30 @@
   white-space: nowrap;
 }
 
-.layout__dots {
+.vscode-dots {
   display: flex;
   gap: 8px;
   margin: 0;
 }
 
-.layout__dot {
+.vscode-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
 }
 
-.layout__dot--red {
+.vscode-dot--red {
   background: #ff5f56;
 }
 
-.layout__dot--yellow {
+.vscode-dot--yellow {
   background: #ffbd2e;
 }
 
-.layout__dot--green {
+.vscode-dot--green {
   background: #27c93f;
 }
 
-.layout__sidebar {
-  width: 150px;
-  background: #23272e;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 10px;
-  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
-}
-
-.layout__nav {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 4px;
-}
-
-.layout__nav-link {
-  color: #d4d4d4;
-  text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 6px 0 0 6px;
-  font-size: 14px;
-  transition: background 0.2s, color 0.2s;
-}
-
-.layout__nav-link--active,
-.layout__nav-link:hover {
-  background: #333337;
-  color: #fff;
-}
 
 .image-tool {
   box-sizing: border-box;
@@ -257,7 +113,15 @@
   padding-top: 20px;
 }
 
+.image-tool__input {
+  min-width: 360px;
+  padding-left: 20px;
+}
 
+.image-tool__list {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
 .image-tool__button {
   background: #2196f3;
   color: white;
@@ -274,7 +138,11 @@
 .image-tool__button:hover {
   background: #1976d2;
 }
-
+.image-tool__button[disabled] {
+  background: #2196f377;
+  color: #ffffff77;
+  cursor: not-allowed;
+}
 .image-tool__status {
   text-align: center;
   margin-top: 10px;
