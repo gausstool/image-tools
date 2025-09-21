@@ -17,7 +17,7 @@ cp index.html 404.html
 # 初始化 git 仓库（如果不存在）
 if [ ! -d .git ]; then
     git init
-    git remote add origin git@github.com:gausszhou/image-tools.git
+    git remote add origin git@github.com:gausstool/image-tools.git
 fi
 
 # 添加所有文件到 git

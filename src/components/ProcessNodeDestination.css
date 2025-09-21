@@ -26,7 +26,7 @@
 }
 
 .process-node-destination__file-info {
-    width: 200px;
+    min-width: 180px;
     color: #fff;
     font-size: 0.9em;
     flex-grow: 1;

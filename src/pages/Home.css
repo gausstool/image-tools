@@ -54,3 +54,7 @@
   margin-top: 24px;
   text-align: center;
 }
+
+.image-tool__preview-title {
+  margin: 0 0 8px;
+}
