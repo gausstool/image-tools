@@ -1,4 +1,3 @@
-import './App.css';
 import Home from './pages/Home';;
 import GithubBadge from './components/GithubBadge';
 
@@ -35,9 +34,11 @@ function App() {
   return (
 
     <div className="layout">
-      <div className="layout__container">
-        <AppHead />
-        <AppBody />
+      <div className="layout__container app-container">
+        <div className="layout__container--inner ">
+          <AppHead />
+          <AppBody />
+        </div>
         <GithubBadge url="https://github.com/gausstool/image-tools" />
       </div>
     </div>
