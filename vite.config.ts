@@ -17,5 +17,16 @@ export default defineConfig({
   },
   build: {
     outDir: process.env.VITE_BUILD_DIR || 'dist',
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) {
+              return 'react';
+            }
+          }
+        }
+      }
+    }
   },
 });
