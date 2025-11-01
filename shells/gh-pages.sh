@@ -8,11 +8,16 @@ echo "删除旧的构建目录..."
 rm -rf dist
 
 # 构建
+cat << EOF > .env
+VITE_BASE_URL=/image-tools/
+VITE_BUILD_DIR=dist/image-tools
+EOF
 npm run build
 
 # 进入构建目录
-cd dist
+cd dist/image-tools
 cp index.html 404.html
+touch .nojekyll # 防止 github pages 忽略 _ 开头的文件
 
 # 初始化 git 仓库（如果不存在）
 if [ ! -d .git ]; then
