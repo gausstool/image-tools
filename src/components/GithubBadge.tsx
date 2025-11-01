@@ -1,5 +1,5 @@
 import React from 'react';
-import './GihubBadge.css';
+import './GithubBadge.css';
 
 interface GithubBadgeProps {
   url?: string;
