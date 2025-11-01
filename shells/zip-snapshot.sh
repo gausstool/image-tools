@@ -20,5 +20,10 @@ cp index.html 404.html
 
 # 压缩
 cd -
+
+if [ ! -d out ]; then
+    mkdir out
+fi
+
 node scripts/snapshot.js
 echo "快照完成！" 
