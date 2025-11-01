@@ -13,4 +13,4 @@ function createZipArchive(folder, filename) {
   console.log(`[info] created ${filename} successfully`);
 }
 
-createZipArchive(distFolderPath, `${name}_v${version}.zip`);
+createZipArchive(distFolderPath, `out/${name}_v${version}.zip`);

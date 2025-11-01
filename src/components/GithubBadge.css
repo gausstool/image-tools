@@ -1,0 +1,18 @@
+.github-badge {
+  position: fixed;
+  z-index: 10000;
+  right: 0;
+  top: 0;
+  width: 80px;
+  height: 80px;
+  fill: #1e1e1e;
+  color: #ffffff;
+}
+
+.github-badge:hover {
+  fill: #2e2e2f;
+  color: #e8ebee;
+}
+.github-badge .octo-arm {
+  transform-origin: 130px 106px
+}
