@@ -1,15 +1,21 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import 'dotenv/config'
+import react from '@vitejs/plugin-react';
+import 'dotenv/config';
+import path from 'node:path';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: process.env.VITE_BASE_URL || '/',
   plugins: [react()],
   server: {
-    port: 2001
+    port: 2001,
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve('src'),
+    },
   },
   build: {
     outDir: process.env.VITE_BUILD_DIR || 'dist',
-  }
-})
+  },
+});
