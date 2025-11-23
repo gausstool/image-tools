@@ -78,12 +78,3 @@ export function blobToBase64(file: File | Blob): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
-
-
-export function replaceFileExtension(originalFileName: string, newExtension: string): string {
-  // 使用正则表达式匹配文件名中的最后一个点（如果有）
-  const regex = /\.([a-z0-9]+)(?:\/|\?|#|$)/i;
-  
-  // 替换后缀名
-  return originalFileName.replace(regex, `.${newExtension}`);
-}

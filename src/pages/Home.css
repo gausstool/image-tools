@@ -1,58 +1,23 @@
-.mac-dots {
-  display: flex;
-  gap: 8px;
-  margin-right: 16px;
-}
-
-.mac-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.mac-dot.red { background: #ff5f56; }
-.mac-dot.yellow { background: #ffbd2e; }
-.mac-dot.green { background: #27c93f; }
-
-.page-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #fff;
-  line-height: 1;
-}
-
-.tools-grid {
-  display: flex;
-  gap: 24px;
-}
-
-.tool-card {
-  background: #252526;
+.image-tool__button {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
   border-radius: 8px;
-  padding: 24px 20px;
-  color: #d4d4d4;
-  text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: background 0.2s;
-}
-.tool-card:hover {
-  background: #333337;
 }
 
-.home-welcome {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.image-tool__button:hover {
+  background: #1976d2;
 }
-
-.home-description {
-  font-size: 1.2rem;
-  color: #bdbdbd;
-  margin-top: 24px;
-  text-align: center;
+.image-tool__button[disabled] {
+  background: #2196f377;
+  color: #ffffff77;
+  cursor: not-allowed;
 }
 
 .image-tool__preview-title {
