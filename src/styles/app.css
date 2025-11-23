@@ -99,27 +99,7 @@
   max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
-.image-tool__button {
-  background: #2196f3;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background 0.3s ease;
-  width: 100%;
-  margin-top: 20px;
-}
 
-.image-tool__button:hover {
-  background: #1976d2;
-}
-.image-tool__button[disabled] {
-  background: #2196f377;
-  color: #ffffff77;
-  cursor: not-allowed;
-}
 .image-tool__status {
   text-align: center;
   margin-top: 10px;

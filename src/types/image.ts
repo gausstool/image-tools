@@ -1,15 +1,19 @@
 export enum EnumImageType {
   SAME = 'same',
-  PNG = 'image/png',
-  JPEG = 'image/jpeg',
-  WEBP = 'image/webp',
+  AVIF = 'avif',
+  JPEG = 'jpg',
+  PNG = 'png',
+  WEBP = 'webp',
+  SVG = 'svg',
+  UNKNOWN = 'unknown'
 }
 
 export enum EnumImageFormat {
-  SVG = 'image/svg+xml',
-  PNG = 'image/png',
+  AVIF = 'image/avif',
   JPEG = 'image/jpeg',
-  WEBP = 'image/webp',
+  PNG = 'png',
+  WEBP = 'webp',
+  SVG = 'image/svg+xml',
 }
 
 export interface ImageInfo {
@@ -17,7 +21,8 @@ export interface ImageInfo {
   url: string;
   name: string;
   size: number;
-  format: EnumImageFormat;
+  originalSize?: number;
+  type: EnumImageType;
   blob: Blob;
   dimensions: {
     width: number;

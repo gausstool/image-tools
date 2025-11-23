@@ -6,10 +6,11 @@ import ProcessNodeDestination from '../components/ProcessNodeDestination';
 import ProcessNodeScale from '../components/ProcessNodeScale';
 import ProcessNodeSource from "../components/ProcessNodeSource";
 import ProcessNodeCompress from "../components/ProcessNodeCompress";
-import { EnumImageFormat, EnumImageType, ImageInfo } from '../types/image';
+import { EnumImageType, ImageInfo } from '../types/image';
 import { getImageDimensions } from '../utils';
 import { compressAndScaleImage } from '../utils/process';
 import './Home.css';
+import { getImageType } from '../utils/image';
 
 const Home: React.FC = () => {
   const [sourceKey, setSourceKey] = useState<number>(0);
@@ -36,7 +37,7 @@ const Home: React.FC = () => {
         url: originalUrl,
         name: file.name,
         size: file.size,
-        format: file.type as EnumImageFormat,
+        type: getImageType(file.type),
         blob: file,
         dimensions
       });
@@ -78,8 +79,9 @@ const Home: React.FC = () => {
           url: result.url,
           name: result.name,
           size: result.blob.size,
-          format: result.format,
+          type: result.type,
           blob: result.blob,
+          originalSize: result.originalSize,
           dimensions: result.dimensions
         });
 

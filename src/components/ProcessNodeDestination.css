@@ -1,78 +1,95 @@
 .process-node-destination {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-    padding: 0 15px;
-    border-radius: 8px;
-    background-color: #272727;
-    height: 70px;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 16px;
+  border-radius: 8px;
+  background-color: #272727;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .destination-image-container {
-    height: 45px;
-    width: 80px;
-    flex-shrink: 0;
+  height: 45px;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.destination-image-format {
+  width: 24px;
+  text-align: center;
+}
+
+.destination-image-format .format-text {
+  font-size: 12px;
+  scale: 80%;
 }
 
 .process-node-destination img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .process-node-destination__file-info {
-    min-width: 180px;
-    color: #fff;
-    font-size: 0.9em;
-    flex-grow: 1;
-    gap: 15px;
+  min-width: 180px;
+  color: #fff;
+  font-size: 0.85em;
+  flex-grow: 1;
+  gap: 8px;
 }
 
 .process-node-destination__file-info p {
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #ccc;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ddd;
+}
+
+.process-node-destination__file-info .size-up {
+  color: red;
+}
+
+.process-node-destination__file-info .size-down {
+  color: green;
 }
 
 .process-node-destination .file-info__label {
-    margin-right: 4px;
-    opacity: 0.7;
+  margin-right: 4px;
+  opacity: 0.7;
 }
 
 .process-node-destination__button-group {
-    display: flex;
-    gap: 8px;
-    flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .process-node-destination__link {
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    white-space: nowrap;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .process-node-destination__link:hover {
-    color: aqua;
+  color: #4396f2;
 }
 
 .process-node-destination__link + .process-node-destination__link {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 button.process-node-destination__link,
 .process-node-destination__link button {
-    border: none;
+  border: none;
 }

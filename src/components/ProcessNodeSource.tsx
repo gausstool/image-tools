@@ -1,59 +1,61 @@
 import React, { useRef, useState } from 'react';
 import './ProcessNodeSource.css';
+import { getImageType } from '../utils/image';
+import { EnumImageType } from '../types/image';
 
 interface SourceProps {
   onChange: (files: File[]) => void;
   onError: (e: Error) => void;
 }
 
-const ProcessNodeSource: React.FC<SourceProps> = ({
-  onChange,
-  onError
-}) => {
+const ProcessNodeSource: React.FC<SourceProps> = ({ onChange, onError }) => {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const processFiles = async (items: DataTransferItemList | DataTransferItem[] | FileList) => {    
+  const processFiles = async (items: DataTransferItemList | DataTransferItem[] | FileList) => {
     const images: File[] = [];
     const processItem = async (item: DataTransferItem | File) => {
       if (item instanceof File) {
-        if (item.type.startsWith('image/')) {
+        if (getImageType(item.type) !== EnumImageType.UNKNOWN) {
           images.push(item);
         }
         return;
       }
-
+      // 拖拽
       if (item.kind === 'file') {
         const entry = item.webkitGetAsEntry();
         if (entry && entry.isDirectory) {
+          // 目录
           const dirReader = (entry as any).createReader();
-          const entries = await new Promise<FileSystemEntry[]>((resolve) => {
+          const entries = await new Promise<FileSystemEntry[]>(resolve => {
             dirReader.readEntries((entries: any) => resolve(entries));
           });
 
           for (const entry of entries) {
             if (entry.isFile) {
               const fileEntry = entry as FileSystemFileEntry;
-              const file = await new Promise<File>((resolve) => {
-                fileEntry.file((file) => resolve(file));
+              const file = await new Promise<File>(resolve => {
+                fileEntry.file(file => resolve(file));
               });
-              if (file.type.startsWith('image/')) {
+              if (getImageType(file.type) !== EnumImageType.UNKNOWN) {
                 images.push(file);
               }
             }
           }
         } else if (entry && entry.isFile) {
+          // 文件
           const fileEntry = entry as FileSystemFileEntry;
-          const file = await new Promise<File>((resolve) => {
-            fileEntry.file((file) => resolve(file));
+          const file = await new Promise<File>(resolve => {
+            fileEntry.file(file => resolve(file));
           });
-          if (file.type.startsWith('image/')) {
+          if (getImageType(file.type) !== EnumImageType.UNKNOWN) {
             images.push(file);
           }
         }
       }
     };
 
+    // 多个文件
     if (items instanceof FileList) {
       await Promise.all(Array.from(items).map(processItem));
     } else {
