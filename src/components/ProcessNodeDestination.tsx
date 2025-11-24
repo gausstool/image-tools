@@ -4,6 +4,7 @@ import { EnumImageType, ImageInfo } from '../types/image';
 import { blobToBase64, copyToClipboard, formatFileSize } from '../utils';
 import './ProcessNodeDestination.css';
 import { calcCompress, calcCompressRate, calculateMaxImageSize } from '../utils/image';
+import { Image } from 'antd';
 
 interface DesinationProps {
   title: string;
@@ -39,7 +40,7 @@ const ProcessNodeDestination: React.FC<DesinationProps> = ({ title, image, onDel
         <div className="format-text">{format.toUpperCase()}</div>
       </div>
       <div className="destination-image-container">
-        <img className="destination-image" src={url} alt={title} />
+        <Image className="destination-image" src={url} alt={title} />
       </div>
       <div className="process-node-destination__file-info">
         <p className="image-filename">

@@ -76,10 +76,10 @@ export const compressAndScaleImage = async (
       try {
         const { ctx, canvas } = await loadImageToCanvas(originImage, processOptions);
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const buffer = [imageData.data.buffer] as ArrayBuffer[];
+        const buffer = imageData.data.buffer;
         const { encode } = await upngModule();
         const pngData = encode(
-          buffer,
+          [buffer],
           canvas.width,
           canvas.height,
           Math.floor((100 - quality) * 2.56) // 0 表示无损压缩
