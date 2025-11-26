@@ -17,7 +17,7 @@ const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, type, onChange 
         <label htmlFor="quality">
           <span>图像质量</span>
           <Tooltip
-            title="注意：PNG 格式使用 UPNG 压缩，JPEG/WEBP 格式使用 canvas 压缩，SVG 格式使用 svgo 压缩"
+            title="注意：PNG 格式使用 UPNG 压缩，JPG 格式使用 canvas 压缩，SVG 格式使用 svgo 压缩"
             color="#272727"
           >
             <InfoCircleOutlined style={{ marginLeft: '4px', color: '#1677ff' }} />
@@ -54,10 +54,9 @@ const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, type, onChange 
           }}
           options={[
             { value: EnumImageType.SAME, label: '原格式' },
-            { value: EnumImageType.WEBP, label: 'WEBP' },
-            { value: EnumImageType.JPEG, label: 'JPEG' },
             { value: EnumImageType.PNG, label: 'PNG' },
             { value: EnumImageType.SVG, label: 'SVG' },
+            { value: EnumImageType.JPEG, label: 'JPG' },
           ]}
         />
       </div>

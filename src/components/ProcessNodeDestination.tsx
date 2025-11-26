@@ -1,10 +1,10 @@
+import { Image } from 'antd';
 import React from 'react';
-import { IconAvif, IconCopy, IconDelete, IconDownload, IconJpg, IconPng, IconSvg, IconWebp } from '../icons';
-import { EnumImageType, ImageInfo } from '../types/image';
+import { IconCopy, IconDelete, IconDownload } from '../icons';
+import { ImageInfo } from '../types/image';
 import { blobToBase64, copyToClipboard, formatFileSize } from '../utils';
+import { calcCompress, calcCompressRate } from '../utils/image';
 import './ProcessNodeDestination.css';
-import { calcCompress, calcCompressRate, calculateMaxImageSize } from '../utils/image';
-import { Divider, Image } from 'antd';
 
 interface DesinationProps {
   title: string;
@@ -20,40 +20,23 @@ const ProcessNodeDestination: React.FC<DesinationProps> = ({ title, image, onDel
   const { url, name, size, type: format, originalSize, error } = image;
   const { width, height } = image.dimensions;
   return error ? (
-    <div className="process-node-destination__error">{error}</div>
+    <div className="process-node-destination">
+      <div className="process-node-destination__error">{error}</div>
+    </div>
   ) : (
     <div className="process-node-destination">
-      <div className="destination-image-format">
-        <div className="format-icon">
-          {format === EnumImageType.AVIF ? (
-            <IconAvif />
-          ) : format === EnumImageType.JPEG ? (
-            <IconJpg />
-          ) : format === EnumImageType.PNG ? (
-            <IconPng />
-          ) : format === EnumImageType.SVG ? (
-            <IconPng />
-          ) : format === EnumImageType.WEBP ? (
-            <IconWebp />
-          ) : (
-            ''
-          )}
-        </div>
-        <div className="format-text">{format.toUpperCase()}</div>
-      </div>
       <div className="destination-image-container">
         <Image className="destination-image" src={url} alt={title} />
       </div>
       <div className="process-node-destination__file-info">
         <p className="image-filename">
-          <span>文件名称: {name}</span>
+          <span>{name}</span>
         </p>
         <p>
-          <span>图片尺寸: {`${width} × ${height}`} </span>
+          <span>{format.toUpperCase()} {`${width} × ${height}`} </span>
         </p>
-
         <p>
-          <span>文件大小: {formatFileSize(size)} </span>
+          <span>{formatFileSize(size)} </span>
           {originalSize ? (
             <span className={calcCompress(originalSize, size) ? 'size-down' : 'size-up'}>
               {calcCompress(originalSize, size) ? '↓' : '↑'}

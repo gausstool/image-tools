@@ -6,7 +6,7 @@
   padding: 4px 16px;
   border-radius: 8px;
   background-color: #272727;
-  width: 100%;
+  width: 480px;
   box-sizing: border-box;
   margin-bottom: 10px;
 }
@@ -19,7 +19,16 @@
 }
 
 .destination-image-container .ant-image {
-  height: 100%;
+  height: 45px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.destination-image-container .ant-image img {
+  height: 45px;
+  width: 80px;
 }
 
 .destination-image-format {
@@ -40,7 +49,7 @@
 }
 
 .process-node-destination__file-info {
-  max-width: 180px;
+  width: 240px;
   color: #fff;
   font-size: 0.85em;
   flex-grow: 1;
@@ -53,15 +62,20 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #ddd;
+  color: #808080;
+  font-size: 12px;
+}
+
+.process-node-destination__file-info .image-filename {
+  color: #FFF;
 }
 
 .process-node-destination__file-info .size-up {
-  color: red;
+  color: #FF477E;
 }
 
 .process-node-destination__file-info .size-down {
-  color: green;
+  color: #28b969;
 }
 
 .process-node-destination .file-info__label {
@@ -76,7 +90,7 @@
 }
 
 .process-node-destination__link {
-  color: white;
+  color: #ccc;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -90,11 +104,20 @@
   color: #4396f2;
 }
 
-.process-node-destination__link + .process-node-destination__link {
+.process-node-destination__link+.process-node-destination__link {
   margin-left: 8px;
 }
 
 button.process-node-destination__link,
 .process-node-destination__link button {
   border: none;
+}
+
+.process-node-destination__error {
+  height: 48px;
+  color: #FF477E;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  width: 360px;
 }

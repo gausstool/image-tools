@@ -1,4 +1,5 @@
-import { EnumImageType, ImageInfo } from '../types/image';
+import { sleep } from '.';
+import { EnumImageFormat, EnumImageType, ImageInfo } from '../types/image';
 import { getImageFormat, loadImageToCanvas, loadImageToString, replaceFileExtension, scaleSvg } from './image';
 const upngModule = () => import('upng-js');
 const svgoModule = () => import('svgo');
@@ -47,6 +48,8 @@ export const compressAndScaleImage = async (
   const { url, name: originName, blob, type: originalType, size: originalSize, dimensions } = originImage;
   const { scale, quality, type } = processOptions;
   const targetType = getTargetType(type, originalType);
+  await sleep(50);
+  console.log(originalType, '=>', targetType, 'scale:', scale, 'quality:', quality);
   // 如果目标是 SVG 格式，读取 svg 文件内容并进行压缩
   if (originalType === EnumImageType.SVG && targetType === EnumImageType.SVG) {
     return new Promise(async (resolve, reject) => {
@@ -55,7 +58,7 @@ export const compressAndScaleImage = async (
         const scaledSvg = scaleSvg(svgString as string, scale);
         const { optimize } = await svgoModule();
         const svgData = await optimize(scaledSvg);
-        const blob = new Blob([svgData.data], { type: EnumImageType.SVG });
+        const blob = new Blob([svgData.data], { type: EnumImageFormat.SVG });
         const url = URL.createObjectURL(blob);
         resolve({
           url,
@@ -71,6 +74,10 @@ export const compressAndScaleImage = async (
     });
   }
 
+  if (originalType !== EnumImageType.SVG && targetType === EnumImageType.SVG) {
+    return Promise.reject(new Error('仅支持 SVG 到 SVG 的转换'));
+  } 
+
   if (targetType === EnumImageType.PNG) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -84,7 +91,7 @@ export const compressAndScaleImage = async (
           canvas.height,
           Math.round((100 - quality) * 2.56) // 0 表示无损压缩
         );
-        const blob = new Blob([pngData], { type: EnumImageType.PNG });
+        const blob = new Blob([pngData], { type: EnumImageFormat.PNG });
         const url = URL.createObjectURL(blob);
         resolve({
           url,

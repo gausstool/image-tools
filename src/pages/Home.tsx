@@ -185,11 +185,15 @@ const Home: React.FC = () => {
           {originalImages.length > 0 && (
             <div className="image-tool__preview">
               <div className="image-tool__preview-group">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="image-tool__preview-head">
                   <h3 className="image-tool__preview-title">原始图片</h3>
-                  <DeleteOutlined onClick={handleClearOriginal} style={{ fontSize: '16px', cursor: 'pointer' }} />
+                  <DeleteOutlined
+                    className="process-node-destination__link"
+                    onClick={handleClearOriginal}
+                    style={{ fontSize: '16px', cursor: 'pointer' }}
+                  />
                 </div>
-                <div className="image-tool__list">
+                <div className="image-tool__preview-list">
                   {originalImages.map(image => (
                     <ProcessNodeDestination
                       key={image.id}
@@ -202,11 +206,15 @@ const Home: React.FC = () => {
               </div>
               {processedImages.length > 0 && (
                 <div className="image-tool__preview-group">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="image-tool__preview-head">
                     <h3 className="image-tool__preview-title">处理后图片</h3>
-                    <DeleteOutlined onClick={handleClearProcessed} style={{ fontSize: '16px', cursor: 'pointer' }} />
+                    <DeleteOutlined
+                      className="process-node-destination__link"
+                      onClick={handleClearProcessed}
+                      style={{ fontSize: '16px', cursor: 'pointer' }}
+                    />
                   </div>
-                  <div className="image-tool__list">
+                  <div className="image-tool__preview-list">
                     {processedImages.map(image => (
                       <ProcessNodeDestination
                         key={image.id}
