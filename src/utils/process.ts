@@ -1,5 +1,6 @@
 import { EnumImageType, ImageInfo } from '../types/image';
 import { getImageFormat, loadImageToCanvas, loadImageToString, replaceFileExtension, scaleSvg } from './image';
+const upngModule = () => import('upng-js');
 const svgoModule = () => import('svgo');
 
 export interface ProcessResult {
@@ -63,6 +64,38 @@ export const compressAndScaleImage = async (
           originalSize,
           type: EnumImageType.SVG,
           dimensions: dimensions,
+        });
+      } catch (err) {
+        reject(err instanceof Error ? err : new Error('转换过程中发生错误'));
+      }
+    });
+  }
+
+  if (targetType === EnumImageType.PNG) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { ctx, canvas } = await loadImageToCanvas(originImage, processOptions);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const buffer = imageData.data.buffer;
+        const { encode } = await upngModule();
+        const pngData = encode(
+          [buffer],
+          canvas.width,
+          canvas.height,
+          Math.round((100 - quality) * 2.56) // 0 表示无损压缩
+        );
+        const blob = new Blob([pngData], { type: EnumImageType.PNG });
+        const url = URL.createObjectURL(blob);
+        resolve({
+          url,
+          name: replaceFileExtension(originName, 'png'),
+          blob,
+          originalSize,
+          type: EnumImageType.PNG,
+          dimensions: {
+            width: canvas.width,
+            height: canvas.height,
+          },
         });
       } catch (err) {
         reject(err instanceof Error ? err : new Error('转换过程中发生错误'));
