@@ -78,3 +78,7 @@ export function blobToBase64(file: File | Blob): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
+
+export function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

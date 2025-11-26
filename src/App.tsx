@@ -1,6 +1,7 @@
 import Home from './pages/Home';;
 import GithubBadge from './components/GithubBadge';
 import MacDots from './components/MacDots';
+import './App.css';
 
 function AppHead() {
   return (
