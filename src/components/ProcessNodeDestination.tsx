@@ -4,7 +4,7 @@ import { EnumImageType, ImageInfo } from '../types/image';
 import { blobToBase64, copyToClipboard, formatFileSize } from '../utils';
 import './ProcessNodeDestination.css';
 import { calcCompress, calcCompressRate, calculateMaxImageSize } from '../utils/image';
-import { Image } from 'antd';
+import { Divider, Image } from 'antd';
 
 interface DesinationProps {
   title: string;
@@ -17,9 +17,11 @@ const ProcessNodeDestination: React.FC<DesinationProps> = ({ title, image, onDel
     const base64 = await blobToBase64(image.blob);
     copyToClipboard(base64);
   };
-  const { url, name, size, type: format, originalSize } = image;
+  const { url, name, size, type: format, originalSize, error } = image;
   const { width, height } = image.dimensions;
-  return (
+  return error ? (
+    <div className="process-node-destination__error">{error}</div>
+  ) : (
     <div className="process-node-destination">
       <div className="destination-image-format">
         <div className="format-icon">

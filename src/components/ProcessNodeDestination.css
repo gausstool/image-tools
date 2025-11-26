@@ -40,7 +40,7 @@
 }
 
 .process-node-destination__file-info {
-  min-width: 180px;
+  max-width: 180px;
   color: #fff;
   font-size: 0.85em;
   flex-grow: 1;

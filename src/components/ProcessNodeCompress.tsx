@@ -16,7 +16,7 @@ const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, type, onChange 
       <div className="image-converter__quality">
         <label htmlFor="quality">
           <span>图像质量</span>
-          <Tooltip title="注意：PNG 格式使用 UPNG 压缩，JPEG/WEBP 格式使用 canvas 压缩，SVG 格式使用 svgo 压缩" color="#272727">
+          <Tooltip title="注意：PNG/JPEG/WEBP 格式使用 canvas 压缩，SVG 格式使用 svgo 压缩" color="#272727">
             <InfoCircleOutlined style={{ marginLeft: '4px', color: '#1677ff' }} />
           </Tooltip>
           <span className="ml-2x">:</span>
@@ -38,7 +38,7 @@ const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, type, onChange 
         <label htmlFor="quality">
           <span>文件格式</span>
           <Tooltip
-            title="注意：SVG（无内嵌 Base64） 最好保留 SVG 格式，相信我将矢量图转换为位图是一件愚蠢的事情"
+            title="注意：相信我将矢量图转换为位图是一件愚蠢的事情，最好不要这么做"
             color="#272727"
           >
             <InfoCircleOutlined style={{ marginLeft: '4px', color: '#1677ff' }} />

@@ -27,5 +27,6 @@ export interface ImageInfo {
   dimensions: {
     width: number;
     height: number;
-  }
+  },
+  error?: string;
 }
