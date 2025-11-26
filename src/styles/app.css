@@ -91,11 +91,12 @@
 }
 
 .image-tool__input {
-  min-width: 360px;
+  width: 360px;
   padding-left: 20px;
 }
 
 .image-tool__list {
+  max-width: 480px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
 }

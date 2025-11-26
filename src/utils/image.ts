@@ -127,24 +127,27 @@ export function loadImageToCanvas(
   const { scale } = processOptions;
   return new Promise(async (resolve, reject) => {
     try {
-      const img = new Image();
-      img.onload = async () => {
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+            image.src = url;
+      image.onload = async () => {
         const canvas = document.createElement('canvas');
         canvas.width = Math.round(dimensions.width * scale);
         canvas.height = Math.round(dimensions.height * scale);
         const ctx = canvas.getContext('2d');
+        
         if (!ctx) {
           reject(new Error('无法创建canvas上下文'));
           return;
         }
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
         resolve({ ctx, canvas });
       };
-      img.onerror = e => {
+      image.onerror = e => {
         reject(e);
       };
 
-      img.src = url;
+
     } catch (err) {
       reject(err instanceof Error ? err : new Error('转换过程中发生错误'));
     }

@@ -4,8 +4,8 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 import ProcessNodeDestination from '../components/ProcessNodeDestination';
 import ProcessNodeScale from '../components/ProcessNodeScale';
-import ProcessNodeSource from "../components/ProcessNodeSource";
-import ProcessNodeCompress from "../components/ProcessNodeCompress";
+import ProcessNodeSource from '../components/ProcessNodeSource';
+import ProcessNodeCompress from '../components/ProcessNodeCompress';
 import { EnumImageType, ImageInfo } from '../types/image';
 import { getImageDimensions } from '../utils';
 import { compressAndScaleImage } from '../utils/process';
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState<number>(0);
 
-  const [quality, setQuality] = useState<number>(80);
+  const [quality, setQuality] = useState<number>(100);
   const [type, setType] = useState<EnumImageType>(EnumImageType.SAME);
 
   const [scale, setScale] = useState<number>(1);
@@ -39,16 +39,16 @@ const Home: React.FC = () => {
         size: file.size,
         type: getImageType(file.type),
         blob: file,
-        dimensions
+        dimensions,
       });
     }
-    setOriginalImages((prev) => prev.concat(processedImages));
+    setOriginalImages(prev => prev.concat(processedImages));
     setProcessedImages([]);
   };
 
   const onImageError = (err: Error) => {
     setError(err instanceof Error ? err.message : '处理图片时出错');
-  }
+  };
 
   const processImages = async () => {
     if (originalImages.length === 0) {
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
       return;
     }
 
-    setProcessing(true)
+    setProcessing(true);
     try {
       setError('');
       setProgress(0);
@@ -65,26 +65,29 @@ const Home: React.FC = () => {
 
       for (let i = 0; i < originalImages.length; i++) {
         const originalImage = originalImages[i];
-        const result = await compressAndScaleImage(
-          originalImage,
-          {
+        try {
+          const result = await compressAndScaleImage(originalImage, {
             scale,
             quality,
             type,
-          }
-        );
+          });
 
-        processedImages.push({
-          id: originalImage.id, // 使用原始图片的 id
-          url: result.url,
-          name: result.name,
-          size: result.blob.size,
-          type: result.type,
-          blob: result.blob,
-          originalSize: result.originalSize,
-          dimensions: result.dimensions
-        });
-
+          processedImages.push({
+            id: originalImage.id, // 使用原始图片的 id
+            url: result.url,
+            name: result.name,
+            size: result.blob.size,
+            type: result.type,
+            blob: result.blob,
+            originalSize: result.originalSize,
+            dimensions: result.dimensions,
+          });
+        } catch (error: any) {
+          processedImages.push({
+            ...originalImage,
+            error: error.message,
+          });
+        }
         // 更新进度
         setProcessedImages(processedImages);
         setProgress(Math.round(((i + 1) / originalImages.length) * 100));
@@ -94,7 +97,7 @@ const Home: React.FC = () => {
     } catch (error: any) {
       onImageError(error);
     }
-    setProcessing(false)
+    setProcessing(false);
   };
 
   // 添加删除原始图片的处理函数
@@ -137,32 +140,37 @@ const Home: React.FC = () => {
       URL.revokeObjectURL(image.url);
     });
     setProcessedImages([]);
-  }
-
+  };
 
   return (
     <div className="image-tool">
       <div className="image-tool__body">
         <div className="image-tool__input">
-          <ProcessNodeSource
-            key={sourceKey}
-            onChange={onImageSuccess}
-            onError={onImageError}
-          />
-          <ProcessNodeCompress quality={quality} type={type} onChange={(quality, format) => {
-            setQuality(quality);
-            setType(format);
-          }} ></ProcessNodeCompress>
-          <ProcessNodeScale scale={scale} onChange={(scale) => {
-            setScale(scale);
-          }} ></ProcessNodeScale>
+          <ProcessNodeSource key={sourceKey} onChange={onImageSuccess} onError={onImageError} />
+          <ProcessNodeCompress
+            quality={quality}
+            type={type}
+            onChange={(quality, format) => {
+              setQuality(quality);
+              setType(format);
+            }}
+          ></ProcessNodeCompress>
+          <ProcessNodeScale
+            scale={scale}
+            onChange={scale => {
+              setScale(scale);
+            }}
+          ></ProcessNodeScale>
 
-          <button className="image-tool__button" onClick={processImages} disabled={originalImages.length === 0 || processing}>
+          <button
+            className="image-tool__button"
+            onClick={processImages}
+            disabled={originalImages.length === 0 || processing}
+          >
             {processing ? '正在处理' : '开始处理'} ({originalImages.length} 张图片)
           </button>
           {originalImages.length > 0 && (
             <>
-
               <div style={{ marginTop: '16px', padding: '0 10px' }}>
                 <Slider value={progress} />
                 <div style={{ textAlign: 'center', marginTop: '8px' }}>
@@ -172,7 +180,6 @@ const Home: React.FC = () => {
             </>
           )}
           {error && <div className="image-tool__error">{error}</div>}
-
         </div>
         <div className="image-tool__output">
           {originalImages.length > 0 && (
@@ -180,13 +187,10 @@ const Home: React.FC = () => {
               <div className="image-tool__preview-group">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <h3 className="image-tool__preview-title">原始图片</h3>
-                  <DeleteOutlined
-                    onClick={handleClearOriginal}
-                    style={{ fontSize: '16px', cursor: 'pointer' }}
-                  />
+                  <DeleteOutlined onClick={handleClearOriginal} style={{ fontSize: '16px', cursor: 'pointer' }} />
                 </div>
                 <div className="image-tool__list">
-                  {originalImages.map((image) => (
+                  {originalImages.map(image => (
                     <ProcessNodeDestination
                       key={image.id}
                       title={`原始图片 ${originalImages.findIndex(img => img.id === image.id) + 1}`}
@@ -200,13 +204,10 @@ const Home: React.FC = () => {
                 <div className="image-tool__preview-group">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h3 className="image-tool__preview-title">处理后图片</h3>
-                    <DeleteOutlined
-                      onClick={handleClearProcessed}
-                      style={{ fontSize: '16px', cursor: 'pointer' }}
-                    />
+                    <DeleteOutlined onClick={handleClearProcessed} style={{ fontSize: '16px', cursor: 'pointer' }} />
                   </div>
                   <div className="image-tool__list">
-                    {processedImages.map((image) => (
+                    {processedImages.map(image => (
                       <ProcessNodeDestination
                         key={image.id}
                         title={`处理后图片 ${processedImages.findIndex(img => img.id === image.id) + 1}`}
