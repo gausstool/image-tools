@@ -1,16 +1,17 @@
 import { Select, Slider, Tooltip } from 'antd';
 import React from 'react';
 import './ProcessNodeCompress.css';
-import { EnumImageType } from '../types/image';
+import { EnumImageType, EnumScaleType } from '../types/image';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
 interface CompressProps {
   quality: number;
-  type: EnumImageType;
-  onChange: (quality: number, format: EnumImageType) => void;
+  imageType: EnumImageType;
+  scaleType: EnumScaleType;
+  onChange: (quality: number, format: EnumImageType, scale: EnumScaleType) => void;
 }
 
-const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, type, onChange }) => {
+const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, imageType, scaleType, onChange }) => {
   return (
     <div className="image-converter__options">
       <div className="image-converter__quality">
@@ -30,14 +31,14 @@ const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, type, onChange 
           max={100}
           value={quality}
           onChange={value => {
-            onChange(value, type);
+            onChange(value, imageType, scaleType);
           }}
           tooltip={{ formatter: value => `${value}%` }}
           style={{ flex: 1, maxWidth: 300, margin: '0 8px' }}
         />
         <span>{quality}%</span>
       </div>
-      <div className="image-converter__quality">
+      <div className="image-converter__format">
         <label htmlFor="quality">
           <span>文件格式</span>
           <Tooltip title="注意：相信我将矢量图转换为位图不是一个明智的选择，最好不要这么做" color="#272727">
@@ -48,15 +49,36 @@ const ProcessNodeCompress: React.FC<CompressProps> = ({ quality, type, onChange 
         <Select
           className="image-converter__select"
           style={{ width: '150px' }}
-          value={type}
+          value={imageType}
           onChange={value => {
-            onChange(quality, value);
+            onChange(quality, value, scaleType);
           }}
           options={[
             { value: EnumImageType.SAME, label: '原格式' },
             { value: EnumImageType.PNG, label: 'PNG' },
             { value: EnumImageType.SVG, label: 'SVG' },
             { value: EnumImageType.JPEG, label: 'JPG' },
+          ]}
+        />
+      </div>
+      <div className="image-converter__scale">
+        <label htmlFor="quality">
+          <span>缩放类型</span>
+          <Tooltip title="" color="#272727">
+            <InfoCircleOutlined style={{ marginLeft: '4px', color: '#1677ff' }} />
+          </Tooltip>
+          <span className="ml-2x">:</span>
+        </label>
+        <Select
+          className="image-converter__select"
+          style={{ width: '150px' }}
+          value={scaleType}
+          onChange={value => {
+            onChange(quality, imageType, value);
+          }}
+          options={[
+            { value: EnumScaleType.RATIO, label: '按倍率' },
+            { value: EnumScaleType.WIDTH, label: '按宽度' },
           ]}
         />
       </div>

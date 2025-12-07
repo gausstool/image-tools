@@ -17,8 +17,8 @@ const ProcessNodeDestination: React.FC<DesinationProps> = ({ title, image, onDel
     const base64 = await blobToBase64(image.blob);
     copyToClipboard(base64);
   };
-  const { url, name, size, type: format, originalSize, error } = image;
-  const { width, height } = image.dimensions;
+  const { url, name, fileSize: size, type: format, originalSize, error } = image;
+  const { width, height } = image.imageSize;
   return error ? (
     <div className="process-node-destination">
       <div className="process-node-destination-body">

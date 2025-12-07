@@ -16,17 +16,24 @@ export enum EnumImageFormat {
   SVG = 'image/svg+xml',
 }
 
+export enum EnumScaleType {
+  RATIO = 'ratio',
+  WIDTH = 'width',
+}
+
+export interface ISize {
+    width: number;
+    height: number;
+}
+
 export interface ImageInfo {
   id: string;
   url: string;
   name: string;
-  size: number;
+  fileSize: number;
   originalSize?: number;
   type: EnumImageType;
   blob: Blob;
-  dimensions: {
-    width: number;
-    height: number;
-  },
+  imageSize: ISize,
   error?: string;
 }

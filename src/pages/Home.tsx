@@ -6,7 +6,7 @@ import ProcessNodeDestination from '../components/ProcessNodeDestination';
 import ProcessNodeScale from '../components/ProcessNodeScale';
 import ProcessNodeSource from '../components/ProcessNodeSource';
 import ProcessNodeCompress from '../components/ProcessNodeCompress';
-import { EnumImageType, ImageInfo } from '../types/image';
+import { EnumImageType, EnumScaleType, ImageInfo } from '../types/image';
 import { getImageDimensions } from '../utils';
 import { compressAndScaleImage } from '../utils/process';
 import './Home.css';
@@ -20,9 +20,12 @@ const Home: React.FC = () => {
   const [progress, setProgress] = useState<number>(0);
 
   const [quality, setQuality] = useState<number>(100);
-  const [type, setType] = useState<EnumImageType>(EnumImageType.SAME);
+  const [imageType, setImageType] = useState<EnumImageType>(EnumImageType.SAME);
 
-  const [scale, setScale] = useState<number>(1);
+  const [scaleType, setScaleType] = useState<EnumScaleType>(EnumScaleType.RATIO);
+  const [scaleRatio, setScaleRatio] = useState<number>(1);
+  const [scaleWidth, setScaleWidth] = useState<number>(256);
+
   const [error, setError] = useState<string>('');
 
   const onImageSuccess = async (files: File[]) => {
@@ -36,10 +39,10 @@ const Home: React.FC = () => {
         id: uuidv4(),
         url: originalUrl,
         name: file.name,
-        size: file.size,
+        fileSize: file.size,
         type: getImageType(file.type),
         blob: file,
-        dimensions,
+        imageSize: dimensions,
       });
     }
     setOriginalImages(prev => prev.concat(processedImages));
@@ -67,20 +70,24 @@ const Home: React.FC = () => {
         const originalImage = originalImages[i];
         try {
           const result = await compressAndScaleImage(originalImage, {
-            scale,
+            type: imageType,
             quality,
-            type,
+            scale: {
+              type: scaleType,
+              ratio: scaleRatio,
+              width: scaleWidth
+            },
           });
 
           processedImages.push({
             id: originalImage.id, // 使用原始图片的 id
             url: result.url,
             name: result.name,
-            size: result.blob.size,
+            fileSize: result.blob.size,
             type: result.type,
             blob: result.blob,
             originalSize: result.originalSize,
-            dimensions: result.dimensions,
+            imageSize: result.dimensions,
           });
         } catch (error: any) {
           processedImages.push({
@@ -150,16 +157,21 @@ const Home: React.FC = () => {
           <ProcessNodeSource key={sourceKey} onChange={onImageSuccess} onError={onImageError} />
           <ProcessNodeCompress
             quality={quality}
-            type={type}
-            onChange={(quality, format) => {
+            imageType={imageType}
+            scaleType={scaleType}
+            onChange={(quality, imageType, scaleType) => {
               setQuality(quality);
-              setType(format);
+              setImageType(imageType);
+              setScaleType(scaleType)
             }}
           ></ProcessNodeCompress>
           <ProcessNodeScale
-            scale={scale}
-            onChange={scale => {
-              setScale(scale);
+            scaleType={scaleType}
+            scaleRatio={scaleRatio}
+            scaleWidth={scaleWidth}
+            onChange={(scale, scaleWidth) => {
+              setScaleRatio(scale);
+              setScaleWidth(scaleWidth)
             }}
           ></ProcessNodeScale>
 
