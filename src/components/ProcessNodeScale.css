@@ -1,11 +1,17 @@
 .image-scale__controls {
   background-color: #272727;
   margin-top: 20px;
-  padding: 20px;
+  padding: 20px 20px 12px;
   border-radius: 8px;
   color: #fff;
 }
 
 .image-scale__radio {
   color: #fff;
+  margin-bottom: 8px;
+}
+
+.image-scale-width__dimensions {
+  padding-left: 100px;
+  margin-bottom: 8px;
 }

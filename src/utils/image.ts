@@ -1,5 +1,5 @@
-import { EnumImageFormat, EnumImageType, ImageInfo } from '../types/image';
-import { ProcessOptions } from './process';
+import { EnumImageFormat, EnumImageType, ISize, ImageInfo } from '../types/image';
+import { ProcessOption } from './process';
 
 export function getImageType(value: string): EnumImageType {
   if (value === 'image/avif') {
@@ -118,13 +118,12 @@ export function loadImageToString(originImage: ImageInfo) {
 
 export function loadImageToCanvas(
   originImage: ImageInfo,
-  processOptions: ProcessOptions
+  size: ISize,
 ): Promise<{
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
 }> {
-  const { url, dimensions } = originImage;
-  const { scale } = processOptions;
+  const { url, imageSize: dimensions } = originImage;
   return new Promise(async (resolve, reject) => {
     try {
       const image = new Image();
@@ -132,8 +131,8 @@ export function loadImageToCanvas(
             image.src = url;
       image.onload = async () => {
         const canvas = document.createElement('canvas');
-        canvas.width = Math.round(dimensions.width * scale);
-        canvas.height = Math.round(dimensions.height * scale);
+        canvas.width = size.width;
+        canvas.height = size.height;
         const ctx = canvas.getContext('2d');
         
         if (!ctx) {
@@ -161,19 +160,13 @@ export function loadImageToCanvas(
  * @param scale
  * @returns
  */
-export function scaleSvg(svgString: string, scale: number): string {
-  // 解析 SVG 字符串
+export function scaleSvg(svgString: string, size: ISize): string {
   const parser = new DOMParser();
   const svgDoc = parser.parseFromString(svgString, 'image/svg+xml');
   const svgElement = svgDoc.querySelector('svg');
   if (svgElement) {
-    // 获取原始大小
-    const width = svgElement.getAttribute('width');
-    const height = svgElement.getAttribute('height');
-    // 调整大小
-    svgElement.setAttribute('width', `${Number(width) * scale}`);
-    svgElement.setAttribute('height', `${Number(height) * scale}`);
-    // 转换回字符串
+    svgElement.setAttribute('width', `${size.width}px`);
+    svgElement.setAttribute('height', `${size.height}px`);
     const newSvgString = new XMLSerializer().serializeToString(svgDoc);
     return newSvgString;
   }
