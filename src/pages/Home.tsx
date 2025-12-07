@@ -146,6 +146,7 @@ const Home: React.FC = () => {
     <div className="image-tool">
       <div className="image-tool__body">
         <div className="image-tool__input">
+          <div className="image-tool__preview-title">图片配置</div>
           <ProcessNodeSource key={sourceKey} onChange={onImageSuccess} onError={onImageError} />
           <ProcessNodeCompress
             quality={quality}
@@ -186,7 +187,7 @@ const Home: React.FC = () => {
             <div className="image-tool__preview">
               <div className="image-tool__preview-group">
                 <div className="image-tool__preview-head">
-                  <h3 className="image-tool__preview-title">原始图片</h3>
+                  <div className="image-tool__preview-title">原始图片</div>
                   <DeleteOutlined
                     className="process-node-destination__link"
                     onClick={handleClearOriginal}
@@ -207,7 +208,7 @@ const Home: React.FC = () => {
               {processedImages.length > 0 && (
                 <div className="image-tool__preview-group">
                   <div className="image-tool__preview-head">
-                    <h3 className="image-tool__preview-title">处理后图片</h3>
+                    <div className="image-tool__preview-title">处理后图片</div>
                     <DeleteOutlined
                       className="process-node-destination__link"
                       onClick={handleClearProcessed}

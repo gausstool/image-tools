@@ -1,34 +1,60 @@
 .process-node-destination {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   gap: 16px;
   padding: 4px 16px;
   border-radius: 8px;
   background-color: #272727;
-  width: 480px;
+  width: 400px;
   box-sizing: border-box;
   margin-bottom: 10px;
 }
 
+.process-node-destination-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.process-node-destination-body {
+  display: flex;
+  gap: 10px;
+}
+
+.process-node-destination-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.file-info-item {
+  height: 20px;
+}
+
+.process-node-destination-footer span {
+  font-size: 12px;
+  color: #ccc;
+}
+
 .destination-image-container {
-  height: 45px;
-  width: 80px;
+  height: 60px;
+  width: 104px;
   flex-shrink: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .destination-image-container .ant-image {
-  height: 45px;
-  width: 80px;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .destination-image-container .ant-image img {
-  height: 45px;
-  width: 80px;
+  height: 100%;
+  width: 100%;
 }
 
 .destination-image-format {
@@ -66,12 +92,10 @@
   font-size: 12px;
 }
 
-.process-node-destination__file-info .image-filename {
-  color: #FFF;
-}
+
 
 .process-node-destination__file-info .size-up {
-  color: #FF477E;
+  color: #ff477e;
 }
 
 .process-node-destination__file-info .size-down {
@@ -104,7 +128,7 @@
   color: #4396f2;
 }
 
-.process-node-destination__link+.process-node-destination__link {
+.process-node-destination__link + .process-node-destination__link {
   margin-left: 8px;
 }
 
@@ -114,8 +138,9 @@ button.process-node-destination__link,
 }
 
 .process-node-destination__error {
-  height: 48px;
-  color: #FF477E;
+  height: 60px;
+  width: 104px;
+  color: #ff477e;
   font-size: 12px;
   display: flex;
   align-items: center;
