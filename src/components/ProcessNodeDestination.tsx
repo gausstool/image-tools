@@ -21,42 +21,53 @@ const ProcessNodeDestination: React.FC<DesinationProps> = ({ title, image, onDel
   const { width, height } = image.dimensions;
   return error ? (
     <div className="process-node-destination">
-      <div className="process-node-destination__error">{error}</div>
+      <div className="process-node-destination-body">
+        <div className="process-node-destination__error">{error}</div>
+      </div>
     </div>
   ) : (
     <div className="process-node-destination">
-      <div className="destination-image-container">
-        <Image className="destination-image" src={url} alt={title} />
-      </div>
-      <div className="process-node-destination__file-info">
-        <p className="image-filename">
-          <span>{name}</span>
-        </p>
-        <p>
-          <span>{format.toUpperCase()} {`${width} × ${height}`} </span>
-        </p>
-        <p>
-          <span>{formatFileSize(size)} </span>
-          {originalSize ? (
-            <span className={calcCompress(originalSize, size) ? 'size-down' : 'size-up'}>
-              {calcCompress(originalSize, size) ? '↓' : '↑'}
-              {calcCompressRate(originalSize, size)}{' '}
+      <div className="process-node-destination-body">
+        <div className="destination-image-container">
+          <Image className="destination-image" src={url} alt={title} />
+        </div>
+        <div className="process-node-destination__file-info">
+          <p className="file-info-item">
+            <span>{name}</span>
+          </p>
+          <p className="file-info-item">
+            <span>
+              {format.toUpperCase()} {`${width} × ${height}`}{' '}
             </span>
-          ) : (
-            ''
-          )}
-        </p>
-      </div>
-      <div className="process-node-destination__button-group">
-        <a href={url} download={name} className="process-node-destination__link" title="下载图片">
-          <IconDownload></IconDownload>
-        </a>
-        <a href="javascript:;" onClick={copyBase64} className="process-node-destination__link" title="复制 Base64">
-          <IconCopy></IconCopy>
-        </a>
-        <a href="javascript:;" onClick={onDelete} className="process-node-destination__link" title="删除">
-          <IconDelete></IconDelete>
-        </a>
+            <span> {formatFileSize(size)} </span>
+          </p>
+          <div className="process-node-destination-footer">
+            {originalSize ? (
+              <span className={calcCompress(originalSize, size) ? 'size-down' : 'size-up'}>
+                {calcCompress(originalSize, size) ? '↓' : '↑'}
+                {calcCompressRate(originalSize, size)}{' '}
+              </span>
+            ) : (
+              <span> </span>
+            )}
+            <div className="process-node-destination__button-group">
+              <a href={url} download={name} className="process-node-destination__link" title="下载图片">
+                <IconDownload></IconDownload>
+              </a>
+              <a
+                href="javascript:;"
+                onClick={copyBase64}
+                className="process-node-destination__link"
+                title="复制 Base64"
+              >
+                <IconCopy></IconCopy>
+              </a>
+              <a href="javascript:;" onClick={onDelete} className="process-node-destination__link" title="删除">
+                <IconDelete></IconDelete>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

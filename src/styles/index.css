@@ -60,3 +60,8 @@ code {
 .mr-2x {
   margin-right: 4px;
 }
+
+.github-link,
+.github-link:visited {
+  color: #ccc;
+}
