@@ -151,6 +151,7 @@ const processImages = async () => {
   }
 
   processing.value = true;
+  processedImages.value = [];
   try {
     error.value = '';
     progress.value = 0;

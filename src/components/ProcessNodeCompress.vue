@@ -49,7 +49,7 @@
     <div class="image-converter__scale">
       <label for="quality">
         <span>缩放类型</span>
-        <el-tooltip content="" placement="top">
+        <el-tooltip content="保持图像的纵横比进行缩放" placement="top">
           <el-icon style="margin-left: 4px; color: #409eff; cursor: pointer">
             <InfoFilled />
           </el-icon>
