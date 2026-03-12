@@ -7,16 +7,21 @@
   <div v-else class="process-node-destination">
     <div class="process-node-destination-body">
       <div class="destination-image-container">
-        <a-image class="destination-image" :src="url" :alt="title" />
+        <el-image
+          class="destination-image"
+          :src="url"
+          :alt="title"
+          fit="contain"
+          :preview-src-list="[url]"
+          :initial-index="0"
+        />
       </div>
       <div class="process-node-destination__file-info">
         <p class="file-info-item">
           <span>{{ name }}</span>
         </p>
-        <p class="file-info-item">
-          <span>
-            {{ format.toUpperCase() }} {{ `${width} × ${height}` }}
-          </span>
+        <p class="file-info-item" style="display: flex; align-items: center; gap: 4px">
+          <span> {{ String(format).toUpperCase() }} {{ `${width} × ${height}` }} </span>
           <span> {{ formatFileSize(size) }} </span>
         </p>
         <div class="process-node-destination-footer">
@@ -29,12 +34,7 @@
             <a :href="url" :download="name" class="process-node-destination__link" title="下载图片">
               <IconDownload></IconDownload>
             </a>
-            <a
-              href="javascript:;"
-              @click="copyBase64"
-              class="process-node-destination__link"
-              title="复制 Base64"
-            >
+            <a href="javascript:;" @click="copyBase64" class="process-node-destination__link" title="复制 Base64">
               <IconCopy></IconCopy>
             </a>
             <a href="javascript:;" @click="emit('delete')" class="process-node-destination__link" title="删除">
@@ -48,7 +48,6 @@
 </template>
 
 <script setup lang="ts">
-import { Image as AImage } from 'ant-design-vue';
 import { IconCopy, IconDelete, IconDownload } from '../icons';
 import { ImageInfo } from '../types/image';
 import { blobToBase64, copyToClipboard, formatFileSize } from '../utils';

@@ -1,6 +1,6 @@
 {
   "name": "image-tools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "gausszhou",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
   },
   "packageManager": "pnpm@9.1.0",
   "dependencies": {
-    "@ant-design/icons-vue": "^7.0.1",
-    "ant-design-vue": "^4.2.6",
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.9.2",
     "svgo": "^3.3.2",
     "upng-js": "^2.1.0",
     "uuid": "^11.1.0",
@@ -26,6 +26,8 @@
     "adm-zip": "^0.5.12",
     "dotenv": "^16.5.0",
     "typescript": "^5.8.3",
+    "unplugin-auto-import": "^21.0.0",
+    "unplugin-vue-components": "^31.0.0",
     "vite": "^6.3.5",
     "vue-tsc": "^2.2.0"
   },

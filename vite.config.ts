@@ -4,29 +4,36 @@ import path from 'node:path';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: process.env.VITE_BASE_URL || '/',
-  plugins: [vue()],
-  server: {
-    port: 2001,
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve('src'),
+export default defineConfig(async () => {
+  const AutoImport = (await import('unplugin-auto-import/vite')).default;
+  const Components = (await import('unplugin-vue-components/vite')).default;
+  const { ElementPlusResolver } = await import('unplugin-vue-components/resolvers');
+
+  return {
+    base: process.env.VITE_BASE_URL || '/',
+    plugins: [
+      vue(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
+    server: {
+      port: 2001,
     },
-  },
-  build: {
-    outDir: process.env.VITE_BUILD_DIR || 'dist',
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('vue')) {
-              return 'vue';
-            }
-          }
+    resolve: {
+      alias: {
+        '@': path.resolve('src'),
+      },
+    },
+    build: {
+      outDir: process.env.VITE_BUILD_DIR || 'dist',
+      rollupOptions: {
+        output: {
         }
       }
-    }
-  },
+    },
+  };
 });
