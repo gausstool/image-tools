@@ -1,28 +1,27 @@
 <template>
   <div v-if="scaleType === EnumScaleType.RATIO" class="image-scale__controls">
     <div class="image-scale__dimensions">
-      <a-radio-group :value="scaleRatio" @change="(e: any) => emit('change', e.target.value, scaleWidth)">
-        <a-radio
+      <el-radio-group :model-value="scaleRatio" @change="(value: number) => emit('change', value, scaleWidth)">
+        <el-radio
           v-for="value in scaleOptions"
           :key="value"
           :value="value"
           class="image-scale__radio"
         >
           {{ value }}x
-        </a-radio>
-      </a-radio-group>
+        </el-radio>
+      </el-radio-group>
     </div>
   </div>
   <div v-else class="image-scale__controls">
     <div class="image-scale-width__dimensions">
-      <a-input-number
-        :value="scaleWidth"
+      <el-input-number
+        :model-value="scaleWidth"
         :min="1"
         :max="4096"
-        @change="(value: any) => {
-          const num = Number(value);
-          if (!Number.isNaN(num) && num >= 1 && num <= 4096) {
-            emit('change', scaleRatio, num);
+        @change="(value: number) => {
+          if (value !== null && value >= 1 && value <= 4096) {
+            emit('change', scaleRatio, value);
           }
         }"
         style="width: 150px"
@@ -32,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { Radio as ARadioGroup, Radio as ARadio, InputNumber as AInputNumber } from 'ant-design-vue';
+import { ElRadioGroup, ElRadio, ElInputNumber } from 'element-plus';
 import { EnumScaleType } from '../types/image';
 import './ProcessNodeScale.css';
 

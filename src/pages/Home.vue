@@ -24,15 +24,16 @@
           }"
         ></ProcessNodeScale>
 
-        <button
+        <el-button
+          type="primary"
           class="image-tool__button"
           @click="processImages"
           :disabled="originalImages.length === 0 || processing"
         >
           {{ processing ? '正在处理' : '开始处理' }} ({{ originalImages.length }} 张图片)
-        </button>
+        </el-button>
         <div v-if="originalImages.length > 0" style="margin-top: 16px; padding: 0 10px">
-          <a-slider :value="progress" />
+          <el-slider :model-value="progress" />
           <div style="text-align: center; margin-top: 8px">
             <div class="image-tool__status">处理进度：{{ progress }}%</div>
           </div>
@@ -44,11 +45,13 @@
           <div class="image-tool__preview-group">
             <div class="image-tool__preview-head">
               <div class="image-tool__preview-title">原始图片</div>
-              <DeleteOutlined
+              <el-icon
                 class="process-node-destination__link"
                 @click="handleClearOriginal"
                 style="font-size: 16px; cursor: pointer"
-              />
+              >
+                <Delete />
+              </el-icon>
             </div>
             <div class="image-tool__preview-list">
               <ProcessNodeDestination
@@ -63,11 +66,13 @@
           <div v-if="processedImages.length > 0" class="image-tool__preview-group">
             <div class="image-tool__preview-head">
               <div class="image-tool__preview-title">处理后图片</div>
-              <DeleteOutlined
+              <el-icon
                 class="process-node-destination__link"
                 @click="handleClearProcessed"
                 style="font-size: 16px; cursor: pointer"
-              />
+              >
+                <Delete />
+              </el-icon>
             </div>
             <div class="image-tool__preview-list">
               <ProcessNodeDestination
@@ -87,8 +92,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Slider as ASlider } from 'ant-design-vue';
-import { DeleteOutlined } from '@ant-design/icons-vue';
+import { ElSlider, ElButton, ElIcon } from 'element-plus';
+import { Delete } from '@element-plus/icons-vue';
 import { v4 as uuidv4 } from 'uuid';
 import ProcessNodeDestination from '../components/ProcessNodeDestination.vue';
 import ProcessNodeScale from '../components/ProcessNodeScale.vue';

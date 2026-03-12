@@ -7,7 +7,7 @@
   <div v-else class="process-node-destination">
     <div class="process-node-destination-body">
       <div class="destination-image-container">
-        <a-image class="destination-image" :src="url" :alt="title" />
+        <el-image class="destination-image" :src="url" :alt="title" fit="contain" :preview-src-list="[url]" :initial-index="0" />
       </div>
       <div class="process-node-destination__file-info">
         <p class="file-info-item">
@@ -15,7 +15,7 @@
         </p>
         <p class="file-info-item">
           <span>
-            {{ format.toUpperCase() }} {{ `${width} × ${height}` }}
+            {{ String(format).toUpperCase() }} {{ `${width} × ${height}` }}
           </span>
           <span> {{ formatFileSize(size) }} </span>
         </p>
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { Image as AImage } from 'ant-design-vue';
+import { ElImage } from 'element-plus';
 import { IconCopy, IconDelete, IconDownload } from '../icons';
 import { ImageInfo } from '../types/image';
 import { blobToBase64, copyToClipboard, formatFileSize } from '../utils';

@@ -1,6 +1,6 @@
 {
   "name": "image-tools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "gausszhou",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
   },
   "packageManager": "pnpm@9.1.0",
   "dependencies": {
-    "@ant-design/icons-vue": "^7.0.1",
-    "ant-design-vue": "^4.2.6",
+    "element-plus": "^2.9.2",
+    "@element-plus/icons-vue": "^2.3.1",
     "svgo": "^3.3.2",
     "upng-js": "^2.1.0",
     "uuid": "^11.1.0",
