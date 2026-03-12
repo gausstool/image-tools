@@ -12,7 +12,7 @@ function createZipArchive(folder, filename) {
   zip.writeZip(filename);
   console.log(`[info] created successfully`);
   console.log(`[info] filename: ${filename}`);
-  console.log(`[info] size: ${zip.toBuffer().length} bytes`);
+  console.log(`[info] filesize: ${zip.toBuffer().length} bytes`);
 }
 
 function addZero(num) {
