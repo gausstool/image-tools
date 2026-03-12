@@ -10,7 +10,9 @@ function createZipArchive(folder, filename) {
   const zip = new AdmZip();
   zip.addLocalFolder(folder);
   zip.writeZip(filename);
-  console.log(`[info] created ${filename} successfully`);
+  console.log(`[info] created successfully`);
+  console.log(`[info] filename: ${filename}`);
+  console.log(`[info] size: ${zip.toBuffer().length} bytes`);
 }
 
 function addZero(num) {
