@@ -71,7 +71,6 @@
 
 <script setup lang="ts">
 import { InfoFilled } from '@element-plus/icons-vue';
-import { ElSlider, ElSelect, ElOption, ElTooltip } from 'element-plus';
 import { EnumImageType, EnumScaleType } from '../types/image';
 import { ref } from 'vue';
 import './ProcessNodeCompress.css';

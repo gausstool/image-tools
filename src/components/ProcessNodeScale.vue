@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElRadioGroup, ElRadio, ElInputNumber } from 'element-plus';
 import { EnumScaleType } from '../types/image';
 import './ProcessNodeScale.css';
 

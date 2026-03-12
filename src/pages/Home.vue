@@ -92,7 +92,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ElSlider, ElButton, ElIcon } from 'element-plus';
 import { Delete } from '@element-plus/icons-vue';
 import { v4 as uuidv4 } from 'uuid';
 import ProcessNodeDestination from '../components/ProcessNodeDestination.vue';
