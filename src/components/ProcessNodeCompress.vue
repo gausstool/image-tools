@@ -18,7 +18,7 @@
         :min="0"
         :max="100"
         v-model="qualityValue"
-        @change="(value: number) => emit('change', value, imageType, scaleType)"
+        @change="(value: any) => emit('change', value, imageType, scaleType)"
         :format-tooltip="(value: number) => `${value}%`"
         style="flex: 1; max-width: 300px; margin: 0 8px"
       />

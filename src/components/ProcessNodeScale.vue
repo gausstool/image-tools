@@ -1,7 +1,7 @@
 <template>
   <div v-if="scaleType === EnumScaleType.RATIO" class="image-scale__controls">
     <div class="image-scale__dimensions">
-      <el-radio-group :model-value="scaleRatio" @change="(value: number) => emit('change', value, scaleWidth)">
+      <el-radio-group :model-value="scaleRatio" @change="(value: any) => emit('change', value, scaleWidth)">
         <el-radio
           v-for="value in scaleOptions"
           :key="value"
@@ -19,7 +19,7 @@
         :model-value="scaleWidth"
         :min="1"
         :max="4096"
-        @change="(value: number) => {
+        @change="(value: any) => {
           if (value !== null && value >= 1 && value <= 4096) {
             emit('change', scaleRatio, value);
           }
