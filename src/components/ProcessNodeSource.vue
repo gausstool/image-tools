@@ -23,7 +23,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import './ProcessNodeSource.css';
 import { getImageType } from '../utils/image';
 import { EnumImageType } from '../types/image';
 
@@ -121,3 +120,25 @@ const handleFileChange = async (e: Event) => {
   }
 };
 </script>
+
+<style scoped>
+.process-node-source {
+  width: 360px;
+}
+
+.process-node-source__upload {
+  color: #fff;
+  border: 2px dashed #666;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-color: #2196f3;
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.process-node-source__upload:hover {
+  border-style: solid;
+}
+</style>

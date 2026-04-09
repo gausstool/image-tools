@@ -32,7 +32,6 @@
 
 <script setup lang="ts">
 import { EnumScaleType } from '../types/image';
-import './ProcessNodeScale.css';
 
 interface Props {
   scaleType: EnumScaleType;
@@ -48,3 +47,23 @@ const emit = defineEmits<{
 
 const scaleOptions = [0.25, 0.5, 1, 2, 4];
 </script>
+
+<style scoped>
+.image-scale__controls {
+  background-color: #272727;
+  margin-top: 20px;
+  padding: 20px 20px 12px;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.image-scale__radio {
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.image-scale-width__dimensions {
+  padding-left: 100px;
+  margin-bottom: 8px;
+}
+</style>

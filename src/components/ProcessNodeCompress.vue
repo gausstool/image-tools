@@ -73,7 +73,6 @@
 import { InfoFilled } from '@element-plus/icons-vue';
 import { EnumImageType, EnumScaleType } from '../types/image';
 import { ref } from 'vue';
-import './ProcessNodeCompress.css';
 
 interface Props {
   quality: number;
@@ -89,3 +88,39 @@ const emit = defineEmits<{
 
 const qualityValue = ref(props.quality);
 </script>
+
+<style scoped>
+.image-converter__options {
+    background-color: #272727;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.image-converter__quality,
+.image-converter__format,
+.image-converter__scale {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.image-converter__quality label {
+  white-space: nowrap;
+}
+
+.image-converter__quality span {
+  line-height: 24px;
+}
+
+.image-converter__select {
+  margin-left: 4px;
+}
+
+.image-converter__scale span {
+  line-height: 24px;
+}
+</style>
